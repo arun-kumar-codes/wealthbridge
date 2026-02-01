@@ -12,7 +12,7 @@ const Recommendations = () => {
                 const response = await axios.get('/api/recommendations');
                 setRecommendations(response.data);
             } catch (err) {
-                setError('Failed to fetch recommendations');
+                setError('Failed to fetch recommendations. Please try again later.');
             } finally {
                 setLoading(false);
             }
@@ -22,7 +22,7 @@ const Recommendations = () => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div>Loading recommendations...</div>;
     }
 
     if (error) {
@@ -37,7 +37,6 @@ const Recommendations = () => {
                     <li key={rec.id}>
                         <h3>{rec.title}</h3>
                         <p>{rec.description}</p>
-                        <p>Risk Level: {rec.riskLevel}</p>
                         <p>Expected Return: {rec.expectedReturn}%</p>
                     </li>
                 ))}
